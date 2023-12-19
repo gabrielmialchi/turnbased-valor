@@ -7,6 +7,7 @@ public class MouseWorld : MonoBehaviour
     private static MouseWorld instance;
     [SerializeField] private LayerMask mousePlaneLayerMask;
 
+    #region UNITY FUNCTIONS
     private void Awake() 
     {
         instance = this;
@@ -16,6 +17,7 @@ public class MouseWorld : MonoBehaviour
     {
         transform.position = MouseWorld.GetPosition();
     }
+    #endregion
 
     public static Vector3 GetPosition ()
     {
