@@ -11,7 +11,6 @@ public class Unit : MonoBehaviour
     
     private Vector3 targetPosition;
 
-    #region UNITY FUNCTIONS
     private void Awake() 
     {
         targetPosition = transform.position;
@@ -35,7 +34,7 @@ public class Unit : MonoBehaviour
         unitAnimator.SetBool("isWalking", false);
         }
     }
-    #endregion
+
     public void Move (Vector3 targetPosition)
     {
         this.targetPosition = targetPosition;
