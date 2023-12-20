@@ -5,6 +5,8 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     [SerializeField] private Animator unitAnimator;
+    [SerializeField] private  float moveSpeed = 4f;
+    [SerializeField] private float rotateSpeed = 10f;
     private Vector3 targetPosition;
 
     private void Update() 
@@ -15,11 +17,12 @@ public class Unit : MonoBehaviour
         if (Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
         {
 
-        float moveSpeed = 4f;
         
         Vector3 moveDirection = (targetPosition - transform.position).normalized;
         
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+        transform.forward = Vector3.Lerp(transform.forward, moveDirection, Time.deltaTime * rotateSpeed);
         
         unitAnimator.SetBool("isWalking", true);
         
