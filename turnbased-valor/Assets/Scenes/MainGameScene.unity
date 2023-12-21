@@ -929,6 +929,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bfccfa11eefc8848acfcfd3352f797a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridDebugObjectPrefab: {fileID: 12705028778953507, guid: e6ec2fc77799f374181f452423cd152e,
+    type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
