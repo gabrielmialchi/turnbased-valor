@@ -85,7 +85,7 @@ MonoBehaviour:
   moveSpeed: 4
   rotateSpeed: 10
   stoppingDistance: 0.1
-  maxMoveDistance: 1
+  maxMoveDistance: 4
 --- !u!1 &8593710243766871109
 GameObject:
   m_ObjectHideFlags: 0
