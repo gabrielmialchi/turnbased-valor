@@ -5,11 +5,13 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     private GridPosition gridPosition;
-    private MoveAction moveActions;
+    private MoveAction moveAction;
+    private SpinAction spinAction;
 
     private void Awake()
     {
-        moveActions = GetComponent<MoveAction>();
+        moveAction = GetComponent<MoveAction>();
+        spinAction = GetComponent<SpinAction>();
     }
 
     private void Start()
@@ -30,7 +32,12 @@ public class Unit : MonoBehaviour
 
     public MoveAction GetMoveAction()
     {
-        return moveActions;
+        return moveAction;
+    }
+
+    public SpinAction GetSpinAction()
+    {
+        return spinAction;
     }
 
     public GridPosition GetGridPosition()
