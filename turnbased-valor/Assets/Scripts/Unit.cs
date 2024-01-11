@@ -67,7 +67,6 @@ public class Unit : MonoBehaviour
         }
     }
 
-
     public bool CanSpendActionPointsToTakeAction(BaseAction baseAction)
     {
         if (actionPoints >= baseAction.GetActionsPointsCost())
