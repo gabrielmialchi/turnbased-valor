@@ -19,4 +19,26 @@ public class Pathfinding : MonoBehaviour
         gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
 
     }
+
+    public List<GridPosition> FindPath(GridPosition startGridPosition, GridPosition endGridPosition)
+    {
+        List<PathNode> openList = new List<PathNode>();
+        List<PathNode> closedList = new List<PathNode>();
+
+        PathNode startNode = gridSystem.GetGridObject(startGridPosition);
+        openList.Add(startNode);
+
+        for (int x = 0; x < gridSystem.GetWidth(); x++)
+        {
+            for (int z = 0; z < gridSystem.GetHeight(); z++)
+            {
+                GridPosition gridPosition = new GridPosition(x, z);
+                PathNode pathNode = gridSystem.GetGridObject(gridPosition);
+
+                //parei aqui, aula 65
+            }
+        }
+
+    }
+
 }
