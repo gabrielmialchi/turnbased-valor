@@ -40,9 +40,10 @@ public class GrenadeProjectile : MonoBehaviour
             foreach (Collider collider in colliderArray)
             {
                 if (collider.TryGetComponent<Unit>(out Unit targetUnit))
-                {
-                    targetUnit.Damage(30);
-                }
+                { targetUnit.Damage(30); }
+                
+                if (collider.TryGetComponent<DestructibleCrate>(out DestructibleCrate destructibleCrate))
+                { destructibleCrate.Damage(); }
             }
 
             OnAnyGrenadeExploded?.Invoke(this, EventArgs.Empty);
