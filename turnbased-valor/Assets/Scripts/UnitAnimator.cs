@@ -8,6 +8,9 @@ public class UnitAnimator : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform bulletProjectilePrefab;
     [SerializeField] private Transform shootPointTransform;
+    [SerializeField] private Transform rifleTransform;
+    [SerializeField] private Transform meleeTransform;
+
 
     private void Awake()
     {
@@ -21,6 +24,28 @@ public class UnitAnimator : MonoBehaviour
         {
             shootAction.OnShoot += ShootAction_OnShoot;
         }
+        
+        if (TryGetComponent<MeleeAction>(out MeleeAction meleeAction)) 
+        {
+            meleeAction.OnMeleeActionStarted += MeleeAction_OnMeleeActionStarted;
+            meleeAction.OnMeleeActionCompleted += MeleeAction_OnMeleeActionCompleted;
+        }
+    }
+
+    private void Start()
+    {
+        EquipRifle();
+    }
+
+    private void MeleeAction_OnMeleeActionStarted(object sender, EventArgs e)
+    {
+        EquipMelee();
+        animator.SetTrigger("MeleeAttack");
+    }
+
+    private void MeleeAction_OnMeleeActionCompleted(object sender, EventArgs e)
+    {
+        EquipRifle();
     }
 
     private void MoveAction_OnStartMoving(object sender, EventArgs e)
@@ -47,5 +72,17 @@ public class UnitAnimator : MonoBehaviour
         targetUnitShootAtPosition.y = shootPointTransform.position.y;
 
         bulletProjectile.Setup(targetUnitShootAtPosition);
+    }
+
+    private void EquipMelee()
+    {
+        meleeTransform.gameObject.SetActive(true);
+        rifleTransform.gameObject.SetActive(false);
+    }
+
+    private void EquipRifle()
+    {
+        meleeTransform.gameObject.SetActive(false);
+        rifleTransform.gameObject.SetActive(true);
     }
 }
