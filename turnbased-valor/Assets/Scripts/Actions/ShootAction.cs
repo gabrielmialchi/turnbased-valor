@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class ShootAction : BaseAction
 {
@@ -29,6 +30,7 @@ public class ShootAction : BaseAction
     private float stateTimer;
     private Unit targetUnit;
     private bool canShootBullet;
+    [SerializeField] private DiceManager diceManager;
 
     private void Update()
     {
@@ -156,6 +158,22 @@ public class ShootAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
+        /*int diceResult = diceManager.RollDice(20);
+        Debug.Log(diceResult);
+
+        if (diceResult == 0)
+        {
+            //Critical Miss
+        } else if (diceResult < ArmorClass() = 12)
+        {
+            //Miss
+        }
+        else 
+        { 
+            //hit
+        }*/
+
+
         targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
 
         state = State.Aiming;
