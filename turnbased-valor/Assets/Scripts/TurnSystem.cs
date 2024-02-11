@@ -12,6 +12,9 @@ public class TurnSystem : MonoBehaviour
     private int turnNumber = 1;
     private bool isPlayerTurn = true;
 
+    //Initiative List<Agent Initiative>
+    //Organize
+
     private void Awake()
     {
         if (Instance != null)
