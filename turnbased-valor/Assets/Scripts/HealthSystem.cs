@@ -34,7 +34,7 @@ public class HealthSystem : MonoBehaviour
             Die();
         }
 
-        Debug.Log("Current Health: " + health);
+        Debug.Log(health);
     }
 
     private void Die()

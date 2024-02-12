@@ -12,15 +12,12 @@ public class Unit : MonoBehaviour
     public static event EventHandler OnAnyUnitDead;
 
     [SerializeField] private bool isEnemy;
-    [SerializeField] private Animator animator;
 
     private GridPosition gridPosition;
     private HealthSystem healthSystem;
     private BaseAction[] baseActionArray;
 
     private int actionPoints = ACTION_POINTS_MAX;
-
-    private int armorClass = 10;
 
     private void Awake()
     {
@@ -133,7 +130,6 @@ public class Unit : MonoBehaviour
 
     public void Damage(int damageAmount)
     {
-        animator.SetTrigger("TookDamage");
         healthSystem.Damage(damageAmount);
     }
 
@@ -149,10 +145,5 @@ public class Unit : MonoBehaviour
     public float GetHealthNormalized()
     {
         return healthSystem.GetHealthNormalized();
-    }
-
-    public int GetArmorClass()
-    {
-        return armorClass;
     }
 }

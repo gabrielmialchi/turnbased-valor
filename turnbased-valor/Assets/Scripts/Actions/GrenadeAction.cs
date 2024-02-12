@@ -59,46 +59,18 @@ public class GrenadeAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        int diceResult = RollDice(20);
-        
-        if (diceResult >= 2)
-        {
-            Debug.Log("Throw Grenade");
+        Transform grenadeProjectileTransform = 
+            Instantiate(grenadeProjectilePrefab, unit.GetWorldPosition(), Quaternion.identity);
 
-            Transform grenadeProjectileTransform = 
-                Instantiate(grenadeProjectilePrefab, unit.GetWorldPosition(), Quaternion.identity);
+        GrenadeProjectile grenadeProjectile = grenadeProjectileTransform.GetComponent<GrenadeProjectile>();
 
-            GrenadeProjectile grenadeProjectile = grenadeProjectileTransform.GetComponent<GrenadeProjectile>();
-           
-            grenadeProjectile.Setup(gridPosition, OnGrenadeBehaviourComplete);
+        grenadeProjectile.Setup(gridPosition, OnGrenadeBehaviourComplete);
 
-            ActionStart(onActionComplete);
-        }
-        else
-        {
-            Debug.Log("MISS!");
-
-            GridPosition unitGridPosition = unit.GetGridPosition();
-
-            Transform grenadeProjectileTransform = 
-                Instantiate(grenadeProjectilePrefab, unit.GetWorldPosition(), Quaternion.identity);
-
-            GrenadeProjectile grenadeProjectile = grenadeProjectileTransform.GetComponent<GrenadeProjectile>();
-           
-            grenadeProjectile.Setup(unitGridPosition, OnGrenadeBehaviourComplete);
-
-            ActionStart(onActionComplete);
-        }
-     
+        ActionStart(onActionComplete);
     }
 
     private void OnGrenadeBehaviourComplete()
     {
         ActionComplete();
-    }
-
-    private int RollDice(int sides)
-    {
-        return UnityEngine.Random.Range(1, sides);
     }
 }

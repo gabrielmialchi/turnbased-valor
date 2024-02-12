@@ -30,6 +30,7 @@ public class ShootAction : BaseAction
     private float stateTimer;
     private Unit targetUnit;
     private bool canShootBullet;
+    [SerializeField] private DiceManager diceManager;
 
     private void Update()
     {
@@ -86,10 +87,6 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
-
-        int attackRoll = RollDice(20);
-        Debug.Log("Attack Roll: " + attackRoll);
-        
         OnAnyShoot?.Invoke(this, new OnShootEventArgs
         {
             targetUnit = targetUnit,
@@ -102,65 +99,7 @@ public class ShootAction : BaseAction
             shootingUnit = unit
         });
 
-        if (attackRoll == 1)
-        {
-            //Critical Miss
-            Debug.Log("Critical Miss");
-            int totalDamage = VandalDamage(10, 3);
-            unit.Damage(totalDamage);
-            Debug.Log("Vandal Damage = " + totalDamage);
-        }
-        else if (attackRoll < 10)
-        {
-            //Miss
-            Debug.Log("Miss");
-            int totalDamage = 0;
-            targetUnit.Damage(totalDamage);
-            Debug.Log("Vandal Damage = " + totalDamage);
-
-        }
-        else if (attackRoll == 20)
-        {
-            //Critical Hit
-            Debug.Log("CRITICAL!!!");
-            int totalDamage = 30;
-            targetUnit.Damage(totalDamage);
-            Debug.Log("Vandal Damage = " + totalDamage);
-
-        }
-        else
-        {
-            //Normal Hit
-            Debug.Log("HIT");
-            int totalDamage = VandalDamage(10, 3);
-            targetUnit.Damage(totalDamage);
-            Debug.Log("Vandal Damage = " + totalDamage);
-        }
-    }
-
-    private int RollDice(int sides)
-    {
-        return UnityEngine.Random.Range(1, sides + 1);
-    }
-
-    public int VandalDamage(int sides, int numberOfDice)
-    {
-        int total = 0;
-        for (int i = 0; i < numberOfDice; i++)
-        {
-            total += RollDice(sides);
-        }
-        return total;
-    }
-
-    public int ClassicDamage(int sides, int numberOfDice)
-    {
-        int total = 0;
-        for (int i = 0; i < numberOfDice; i++)
-        {
-            total += RollDice(sides);
-        }
-        return total;
+        targetUnit.Damage(40);
     }
 
     public override string GetActionName()
@@ -219,6 +158,22 @@ public class ShootAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
+        /*int diceResult = diceManager.RollDice(20);
+        Debug.Log(diceResult);
+
+        if (diceResult == 0)
+        {
+            //Critical Miss
+        } else if (diceResult < ArmorClass() = 12)
+        {
+            //Miss
+        }
+        else 
+        { 
+            //hit
+        }*/
+
+
         targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
 
         state = State.Aiming;
