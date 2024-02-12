@@ -24,12 +24,14 @@ public class ShootAction : BaseAction
     }
 
     [SerializeField] private LayerMask obstaclesLayerMask;
+    [SerializeField] private GameObject damageTextPrefab;
 
+    private Unit targetUnit;
     private State state;
     private int maxShootDistance = 5;
     private float stateTimer;
-    private Unit targetUnit;
     private bool canShootBullet;
+    private int attackRoll;
 
     private void Update()
     {
@@ -84,10 +86,9 @@ public class ShootAction : BaseAction
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
-
-        int attackRoll = RollDice(20);
+        attackRoll = RollDice(20);
         Debug.Log("Attack Roll: " + attackRoll);
         
         OnAnyShoot?.Invoke(this, new OnShootEventArgs
@@ -109,6 +110,7 @@ public class ShootAction : BaseAction
             int totalDamage = VandalDamage(10, 3);
             unit.Damage(totalDamage);
             Debug.Log("Vandal Damage = " + totalDamage);
+            //Instantiate(damageTextPrefab, targetUnit, Quaternion.identity);
         }
         else if (attackRoll < 10)
         {
@@ -140,7 +142,7 @@ public class ShootAction : BaseAction
 
     private int RollDice(int sides)
     {
-        return UnityEngine.Random.Range(1, sides + 1);
+        return UnityEngine.Random.Range(1, sides);
     }
 
     public int VandalDamage(int sides, int numberOfDice)

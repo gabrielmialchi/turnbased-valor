@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+
     private const int ACTION_POINTS_MAX = 2;
 
     public static event EventHandler OnAnyActionPointsChanged;
@@ -24,6 +25,7 @@ public class Unit : MonoBehaviour
 
     private void Awake()
     {
+
         healthSystem = GetComponent<HealthSystem>();
         baseActionArray = GetComponents<BaseAction>();
     }
@@ -134,6 +136,11 @@ public class Unit : MonoBehaviour
     public void Damage(int damageAmount)
     {
         animator.SetTrigger("TookDamage");
+        healthSystem.Damage(damageAmount);
+    }
+
+    public void GetDamage(int damageAmount)
+    {
         healthSystem.Damage(damageAmount);
     }
 
