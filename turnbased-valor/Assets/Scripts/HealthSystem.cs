@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class HealthSystem : MonoBehaviour
     public event EventHandler OnDamaged;
     
     [SerializeField] private int health = 100;
+    [SerializeField] private DamageTextUI damageText;
+    [SerializeField] private GameObject damageTextPrefab;
 
     private int healthMax;
 
@@ -21,6 +24,9 @@ public class HealthSystem : MonoBehaviour
     public void Damage(int damageAmount)
     {
         health -= damageAmount;
+        
+        //Aqui
+        Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
 
         if ( health < 0)
         {

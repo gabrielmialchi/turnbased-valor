@@ -6,17 +6,19 @@ using UnityEngine;
 public class DamageTextUI : MonoBehaviour
 {
 
-    [SerializeField] private TextMeshProUGUI damageText;
+    //[SerializeField] private TextMeshProUGUI damageText;
+    //[SerializeField] private HealthSystem healthSystem;
 
 
     private void Awake()
     {
-        damageText = GetComponent<TextMeshProUGUI>();
+        //damageText = GetComponent<TextMeshProUGUI>();
     }
 
     public void UpdateDamageText()
     {
-        damageText.text = "Olá";
+        //int damageAmount = healthSystem.Damage(damageAmount);
+        //damageText.text = damageAmount.ToString();
     }
 
 
