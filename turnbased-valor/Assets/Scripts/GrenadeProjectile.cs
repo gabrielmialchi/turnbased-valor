@@ -40,7 +40,11 @@ public class GrenadeProjectile : MonoBehaviour
             foreach (Collider collider in colliderArray)
             {
                 if (collider.TryGetComponent<Unit>(out Unit targetUnit))
-                { targetUnit.Damage(30); }
+                {
+                    int totalDamage = GrenadeDamage(6, 6);
+                    targetUnit.Damage(totalDamage); 
+                    Debug.Log("Grenade Damage = " + totalDamage); 
+                }
                 
                 if (collider.TryGetComponent<DestructibleCrate>(out DestructibleCrate destructibleCrate))
                 { destructibleCrate.Damage(); }
@@ -57,6 +61,7 @@ public class GrenadeProjectile : MonoBehaviour
             onGrenadeBehaviourComplete();
         }
     }
+
     public void Setup(GridPosition targetGridPosition, Action onGrenadeBehaviourComplete)
     {
         this.onGrenadeBehaviourComplete = onGrenadeBehaviourComplete;
@@ -67,4 +72,18 @@ public class GrenadeProjectile : MonoBehaviour
         totalDistance = Vector3.Distance(positionXZ, targetPosition);
     }
 
+    public int GrenadeDamage(int sides, int numberOfDice)
+    {
+        int total = 0;
+        for (int i = 0; i < numberOfDice; i++)
+        {
+            total += RollDice(sides);
+        }
+        return total;
+    }
+
+    private int RollDice(int sides)
+    {
+        return UnityEngine.Random.Range(1, sides + 1);
+    }
 }
