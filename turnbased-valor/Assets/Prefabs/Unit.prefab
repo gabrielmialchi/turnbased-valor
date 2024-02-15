@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  animator: {fileID: 5261287915592162155}
 --- !u!65 &8461227462809192924
 BoxCollider:
   m_ObjectHideFlags: 0

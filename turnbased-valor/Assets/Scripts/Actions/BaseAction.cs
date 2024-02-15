@@ -11,10 +11,12 @@ public abstract class BaseAction : MonoBehaviour
     protected Unit unit;
     protected bool isActive;
     protected Action onActionComplete;
+    //public DiceManager diceManager;
 
     protected virtual void Awake()
     {
         unit = GetComponent<Unit>();
+        //diceManager = GetComponent<DiceManager>();
     }
 
     public abstract string GetActionName();

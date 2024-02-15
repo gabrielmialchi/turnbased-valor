@@ -24,7 +24,8 @@ public class ShootAction : BaseAction
     }
 
     [SerializeField] private LayerMask obstaclesLayerMask;
-    [SerializeField] private GameObject damageTextPrefab;
+    //[SerializeField] private GameObject damageTextPrefab;
+    [SerializeField] private DiceManager diceManager;
 
     private Unit targetUnit;
     private State state;
@@ -32,6 +33,7 @@ public class ShootAction : BaseAction
     private float stateTimer;
     private bool canShootBullet;
     private int attackRoll;
+    private int totalDamage;
 
     private void Update()
     {
@@ -88,7 +90,7 @@ public class ShootAction : BaseAction
 
     public void Shoot()
     {
-        attackRoll = RollDice(20);
+        attackRoll = diceManager.RollDice(20);
         Debug.Log("Attack Roll: " + attackRoll);
         
         OnAnyShoot?.Invoke(this, new OnShootEventArgs
@@ -103,11 +105,14 @@ public class ShootAction : BaseAction
             shootingUnit = unit
         });
 
+        //diceManager.VandalDamage();
+
+        
         if (attackRoll == 1)
         {
             //Critical Miss
             Debug.Log("Critical Miss");
-            int totalDamage = VandalDamage(10, 3);
+            totalDamage = diceManager.RollVariousDices(10, 3);
             unit.Damage(totalDamage);
             Debug.Log("Vandal Damage = " + totalDamage);
             //Instantiate(damageTextPrefab, targetUnit, Quaternion.identity);
@@ -116,7 +121,7 @@ public class ShootAction : BaseAction
         {
             //Miss
             Debug.Log("Miss");
-            int totalDamage = 0;
+            totalDamage = 0;
             targetUnit.Damage(totalDamage);
             Debug.Log("Vandal Damage = " + totalDamage);
 
@@ -125,7 +130,7 @@ public class ShootAction : BaseAction
         {
             //Critical Hit
             Debug.Log("CRITICAL!!!");
-            int totalDamage = 30;
+            totalDamage = 30;
             targetUnit.Damage(totalDamage);
             Debug.Log("Vandal Damage = " + totalDamage);
 
@@ -134,10 +139,12 @@ public class ShootAction : BaseAction
         {
             //Normal Hit
             Debug.Log("HIT");
-            int totalDamage = VandalDamage(10, 3);
+            totalDamage = diceManager.RollVariousDices(10, 3);
             targetUnit.Damage(totalDamage);
             Debug.Log("Vandal Damage = " + totalDamage);
         }
+
+
     }
 
     private int RollDice(int sides)
