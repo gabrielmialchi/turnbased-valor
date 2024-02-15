@@ -24,7 +24,7 @@ public class ShootAction : BaseAction
     }
 
     [SerializeField] private LayerMask obstaclesLayerMask;
-    //[SerializeField] private GameObject damageTextPrefab;
+    [SerializeField] private DiceManager diceManager;
 
     private Unit targetUnit;
     private State state;
@@ -32,6 +32,13 @@ public class ShootAction : BaseAction
     private float stateTimer;
     private bool canShootBullet;
     private int attackRoll;
+    private int totalDamage;
+
+
+    public void Start()
+    {
+        if (diceManager == null) diceManager = GetComponent<DiceManager>();
+    }
 
     private void Update()
     {
@@ -88,9 +95,9 @@ public class ShootAction : BaseAction
 
     public void Shoot()
     {
-        attackRoll = RollDice(20);
+        attackRoll = diceManager.RollDice(20);
         Debug.Log("Attack Roll: " + attackRoll);
-        
+
         OnAnyShoot?.Invoke(this, new OnShootEventArgs
         {
             targetUnit = targetUnit,
@@ -103,19 +110,22 @@ public class ShootAction : BaseAction
             shootingUnit = unit
         });
 
+        //CalculateDamage();
+
+
         if (attackRoll == 1)
         {
             //Critical Miss
-            Debug.Log("Critical Miss");
-            int totalDamage = VandalDamage(10, 3);
+            Debug.Log("CRITICAL MISS");
+            totalDamage = diceManager.VandalDamage(10, 3);
             unit.Damage(totalDamage);
             Debug.Log("Vandal Damage = " + totalDamage);
         }
-        else if (attackRoll < 10)
+        else if (attackRoll < 10 && attackRoll != 0)
         {
             //Miss
-            Debug.Log("Miss");
-            int totalDamage = 0;
+            Debug.Log("MISS");
+            totalDamage = 0;
             targetUnit.Damage(totalDamage);
             Debug.Log("Vandal Damage = " + totalDamage);
 
@@ -124,7 +134,7 @@ public class ShootAction : BaseAction
         {
             //Critical Hit
             Debug.Log("CRITICAL!!!");
-            int totalDamage = 30;
+            totalDamage = 30;
             targetUnit.Damage(totalDamage);
             Debug.Log("Vandal Damage = " + totalDamage);
 
@@ -133,35 +143,11 @@ public class ShootAction : BaseAction
         {
             //Normal Hit
             Debug.Log("HIT");
-            int totalDamage = VandalDamage(10, 3);
+            totalDamage = diceManager.VandalDamage(10, 3);
             targetUnit.Damage(totalDamage);
             Debug.Log("Vandal Damage = " + totalDamage);
         }
-    }
 
-    private int RollDice(int sides)
-    {
-        return UnityEngine.Random.Range(1, sides);
-    }
-
-    public int VandalDamage(int sides, int numberOfDice)
-    {
-        int total = 0;
-        for (int i = 0; i < numberOfDice; i++)
-        {
-            total += RollDice(sides);
-        }
-        return total;
-    }
-
-    public int ClassicDamage(int sides, int numberOfDice)
-    {
-        int total = 0;
-        for (int i = 0; i < numberOfDice; i++)
-        {
-            total += RollDice(sides);
-        }
-        return total;
     }
 
     public override string GetActionName()
