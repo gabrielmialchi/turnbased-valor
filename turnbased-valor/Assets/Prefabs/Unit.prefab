@@ -188,6 +188,7 @@ Transform:
   - {fileID: 5208362977016609395}
   - {fileID: 2361298801597670818}
   - {fileID: 6458835463301260711}
+  - {fileID: 6916596812379122959}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2916824919871053430
@@ -265,7 +266,6 @@ MonoBehaviour:
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  diceManager: {fileID: 0}
 --- !u!114 &8904270914979938462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +297,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  damageText: {fileID: 8778954537169736600, guid: 1d1e9623ea8dc4f48a020b7dea8ba11a,
+    type: 3}
+  damageTextPrefab: {fileID: 7293474588595356725, guid: 1d1e9623ea8dc4f48a020b7dea8ba11a,
+    type: 3}
 --- !u!114 &277272574337986831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +476,37 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 0.02, y: 0.02}
   m_UseGraphicAlpha: 1
+--- !u!1 &3780061436057200102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6916596812379122959}
+  m_Layer: 7
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6916596812379122959
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3780061436057200102}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.35, y: 1.681, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5037005104177638429}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3898198526586559107
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,15 +699,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51acbea28ef60dd4bb55c6e5fb6a554e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTextPrefab: {fileID: 490185520359191778, guid: e306d070fecb175418f756419a15e3ba,
-    type: 3}
-  damageText: {fileID: 2725983363217703870, guid: e306d070fecb175418f756419a15e3ba,
-    type: 3}
   actionPointsText: {fileID: 5309617182025840489}
   unit: {fileID: 2916824919871053430}
   healthBarImage: {fileID: 6821344101980452460}
   healthSystem: {fileID: 8607959675629092727}
-  shootAction: {fileID: -21327731888357444}
 --- !u!114 &4456309931125450818
 MonoBehaviour:
   m_ObjectHideFlags: 0

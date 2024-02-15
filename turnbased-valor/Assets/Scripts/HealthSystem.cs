@@ -11,6 +11,8 @@ public class HealthSystem : MonoBehaviour
     public event EventHandler OnDamaged;
     
     [SerializeField] private int health = 100;
+    [SerializeField] private DamageTextUI damageText;
+    [SerializeField] private GameObject damageTextPrefab;
 
     private int healthMax;
 
@@ -22,14 +24,16 @@ public class HealthSystem : MonoBehaviour
     public void Damage(int damageAmount)
     {
         health -= damageAmount;
-
-        OnDamaged?.Invoke(this, EventArgs.Empty);
         
+        //Aqui
+        Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
+
         if ( health < 0)
         {
             health = 0;
         }
 
+        OnDamaged?.Invoke(this, EventArgs.Empty);
 
         if (health == 0)
         {
@@ -47,10 +51,5 @@ public class HealthSystem : MonoBehaviour
     public float GetHealthNormalized()
     {
         return (float)health / healthMax;
-    }
-
-    public void GetDamage(int damageAmount)
-    {
-        Damage(damageAmount);
     }
 }
