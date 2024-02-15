@@ -24,7 +24,7 @@ public class ShootAction : BaseAction
     }
 
     [SerializeField] private LayerMask obstaclesLayerMask;
-    //[SerializeField] private GameObject damageTextPrefab;
+    [SerializeField] private GameObject damageTextPrefab;
 
     private Unit targetUnit;
     private State state;
@@ -110,6 +110,7 @@ public class ShootAction : BaseAction
             int totalDamage = VandalDamage(10, 3);
             unit.Damage(totalDamage);
             Debug.Log("Vandal Damage = " + totalDamage);
+            //Instantiate(damageTextPrefab, targetUnit, Quaternion.identity);
         }
         else if (attackRoll < 10)
         {

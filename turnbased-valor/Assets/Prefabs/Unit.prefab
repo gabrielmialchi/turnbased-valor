@@ -204,7 +204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
-  animator: {fileID: 5261287915592162155}
 --- !u!65 &8461227462809192924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -266,6 +265,7 @@ MonoBehaviour:
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  diceManager: {fileID: 0}
 --- !u!114 &8904270914979938462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,10 +297,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  damageText: {fileID: 8778954537169736600, guid: 1d1e9623ea8dc4f48a020b7dea8ba11a,
-    type: 3}
-  damageTextPrefab: {fileID: 7293474588595356725, guid: 1d1e9623ea8dc4f48a020b7dea8ba11a,
-    type: 3}
 --- !u!114 &277272574337986831
 MonoBehaviour:
   m_ObjectHideFlags: 0
